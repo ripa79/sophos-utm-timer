@@ -178,8 +178,9 @@ function convertTimeToMinutes(time) {
     return parseInt(hours) * 60 + parseInt(minutes);
 }
 
-
-//interval.start(checkTiming, 5000);
+// if one wants to run the checkTiming more often then this needs to be changed:
+const interval = process.env.TIMER_INTERVAL * 60 * 1000
+interval.start(checkTiming, 5000);
 
 
 

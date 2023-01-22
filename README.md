@@ -1,9 +1,25 @@
-to run:
-1. export env variables or use .env file:
-    - export PORT=3000 : the port that application runs
-    - export URL='mongodb://root:xxx@192.168.11.178:27017' : mongodb url
-    - export USER=admin : the user that can login into the app
-    - export PASSWORD=xxx : user password
-    - export SOPHOS_API_KEY='xxx' : the sophos utm api key
-    - export SOPHOS_URL='https://192.168.11.100:4444/api/' : the sophos appliance url
-2. node index.js
+Needed environment variables:
+# the port that application runs
+export PORT=3000
+# mongodb url 
+export URL='mongodb://<user>:<password>@<server_name>:PORT'
+# the user that can login into the app
+export USER=admin
+# user password 
+export PASSWORD=xxx
+# the sophos utm api key
+export SOPHOS_API_KEY='xxx'
+# the sophos appliance url
+export SOPHOS_URL='https://<server_name>:4444/api/'
+# timer interval in minutes
+export TIMER_INTERVAL=5
+
+MongoDB will have 2 collections ApplicationControlRules and TimePeriods
+Populate the mongodb to have the application control rules from the Sophos API:
+$ node sync_appcontrolrules.js
+
+to run the timer app:
+$ node index.js
+
+Timer app has simple web ui in:
+http://<server>:PORT/time-periods
