@@ -1,0 +1,74 @@
+extends layout
+
+block content
+    h1 Time Period Definitions
+    .table-container
+      .table-header
+        .table-row
+          .table-header-cell Name
+          .table-header-cell Days
+          .table-header-cell Start Time
+          .table-header-cell End Time
+          .table-header-cell REF
+          .table-header-cell REF Name
+          .table-header-cell Actions
+      .table-body
+        each timePeriod in timePeriods
+          .table-row
+            .table-cell= timePeriod.name
+            .table-cell= timePeriod.days.join(', ')
+            .table-cell= timePeriod.startTime
+            .table-cell= timePeriod.endTime
+            .table-cell= timePeriod.ref
+            each obj in ApplicationControlRules
+              if obj._ref === timePeriod.ref
+                .table-cell= obj.name
+            .table-cell
+              a(href=`/time-periods/${timePeriod._id}/delete`) Delete
+
+
+    h2 Add Time Period Definition
+    form(action='/time-periods', method='post')
+        div(id=name)
+          label(for='name') Name:
+          input(type='text', id='name', name='name')
+        div(id='days')
+          label(for='days') Days:
+          div(id='days-container')
+            div(id='weekday')
+              input(type='checkbox', id='days-monday', name='days', value='monday')
+              label(for='days-monday') Monday
+            div(id='weekday')
+              input(type='checkbox', id='days-tuesday', name='days', value='tuesday')
+              label(for='days-tuesday') Tuesday
+            div(id='weekday')
+              input(type='checkbox', id='days-wednesday', name='days', value='wednesday')
+              label(for='days-wednesday') Wednesday
+            div(id='weekday')
+              input(type='checkbox', id='days-thursday', name='days', value='thursday')
+              label(for='days-thursday') Thursday
+            div(id='weekday')
+              input(type='checkbox', id='days-friday', name='days', value='friday')
+              label(for='days-friday') Friday
+            div(id='weekday')
+              input(type='checkbox', id='days-saturday', name='days', value='saturday')
+              label(for='days-saturday') Saturday
+            div(id='weekday')
+              input(type='checkbox', id='days-sunday', name='days', value='sunday')
+              label(for='days-sunday') Sunday
+        
+        div
+          label(for='startTime') Start Time:
+          input(type='time', id='startTime', name='startTime')
+          label(for='endTime') End Time:
+          input(type='time', id='endTime', name='endTime')
+        br
+        div 
+          label(for='ref') Ref: 
+          select(name='ref')
+            each option in ApplicationControlRules_Ref
+              option= option
+
+
+        div
+        input(type='submit', value='Add Time Period')

@@ -1,0 +1,2 @@
+- edit timeperiod a(href=`/time-periods/${timePeriod._id}/edit`) Edit
+- add docker build things

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1 Edit Time Period
+    form(action=`/time-periods/${timePeriod._id}/edit` method='post')
+        label(for='name') Name:
+        input(type='text' id='name' name='name' value=timePeriod.name)
+
+        label(for='days') Days:
+        input(type='text' id='days' name='days' value=timePeriod.days.join())
+
+        label(for='startTime') Start Time:
+        input(type='text' id='startTime' name='startTime' value=timePeriod.startTime)
+
+        label(for='endTime') End Time:
+        input(type='text' id='endTime' name='endTime' value=timePeriod.endTime)
+
+        input(type='submit' value='Save')
